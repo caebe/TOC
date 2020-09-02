@@ -38,6 +38,8 @@ namespace TOC
 			btnStart.Content = "Running";
 
 			tbCurrent.Text = "https://tibiantis.info/stats/guild/" + cbGuilds.SelectedItem.ToString().Replace(" ", "%20");
+			tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [STARTED] - REFRESHING EVERY 5 SECONDS" + Environment.NewLine;
+			tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") +  " DELAY CAN BE UP TO ONE MINUTE DUE TO LIMITATIONS OF TIBIANTIS WEBPAGE" + Environment.NewLine;
 		}
 
 		private void btnStopConsole_Click(object sender, RoutedEventArgs e)
@@ -100,6 +102,7 @@ namespace TOC
 							tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [ALREADY ONLINE] " + item.InnerText;
 							tbTextBox.Text += Environment.NewLine;
 							PlayersOnline.Add(item.InnerText);
+							NextPlayersOnline.Add(item.InnerText);
 						}
 					}
 					else

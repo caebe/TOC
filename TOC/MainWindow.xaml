@@ -26,13 +26,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
                 <Button x:Name="btnStart" Content="Start" Margin="0 0 5 0" Grid.Column="0" Click="btnStart_Click"/>
                 <Button x:Name="btnStop" Content="Stop" Margin="5 0 0 0"  Grid.Column="1" Click="btnStopConsole_Click"/>
             </Grid>
         </StackPanel>
         <StackPanel Margin="10">
-            <TextBox x:Name="tbTextBox"  Height="250" VerticalScrollBarVisibility="Visible"/>
+            <TextBox x:Name="tbTextBox"  Height="250" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"/>
         </StackPanel>
     </StackPanel>
 </Window>
