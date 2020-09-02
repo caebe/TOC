@@ -12,9 +12,12 @@ namespace TOC
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		List<string> PlayersOnline = new List<string>();
 		bool firstRun = true;
+		List<string> PlayersOnline = new List<string>();
+		List<string> NextPlayersOnline = new List<string>();
+		
 		DispatcherTimer timer = new DispatcherTimer();
+		SoundPlayer soundPlayer = new SoundPlayer();
 
 		public MainWindow()
 		{
@@ -31,7 +34,9 @@ namespace TOC
 
 			btnStop.IsEnabled = true;
 			btnStart.IsEnabled = false;
+			cbGuilds.IsEnabled = false;
 			btnStart.Content = "Running";
+
 			tbCurrent.Text = "https://tibiantis.info/stats/guild/" + cbGuilds.SelectedItem.ToString().Replace(" ", "%20");
 		}
 
@@ -41,6 +46,7 @@ namespace TOC
 			btnStop.IsEnabled = false;
 			btnStart.IsEnabled = true;
 			btnStart.Content = "Start";
+			cbGuilds.IsEnabled = true;
 			tbTextBox.Clear();
 			firstRun = true;
 		}
@@ -91,47 +97,40 @@ namespace TOC
 					{
 						if (!PlayersOnline.Contains(item.InnerText))
 						{
-							tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [ONLINE] " + item.InnerText;
+							tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [ALREADY ONLINE] " + item.InnerText;
 							tbTextBox.Text += Environment.NewLine;
-
-						}
-						else
-						{
-							if (!PlayersOnline.Contains(item.InnerText))
-							{
-								tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [LOGGED IN] " + item.InnerText;
-								tbTextBox.Text += Environment.NewLine;
-
-							}
+							PlayersOnline.Add(item.InnerText);
 						}
 					}
-				}
+					else
+					{
+						NextPlayersOnline.Add(item.InnerText);
 
-				PlayersOnline.Clear();
-
-				foreach (var item in table.SelectNodes(".//tr[@class='mu']/td[2]/nick"))
-				{
-					PlayersOnline.Add(item.InnerText);
+						if (!PlayersOnline.Contains(item.InnerText))
+						{
+							tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [LOGGED IN] " + item.InnerText;
+							tbTextBox.Text += Environment.NewLine;
+							PlayLogin();
+						}
+						//else if (PlayersOnline.Contains(item.InnerText) && !NextPlayersOnline.Contains(item.InnerText))
+						//{
+						//	tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [LOGGED OUT] " + item.InnerText;
+						//	tbTextBox.Text += Environment.NewLine;
+						//}
+					}
 				}
-				firstRun = false;
 			}
+
+			PlayersOnline.Clear();
+			PlayersOnline.AddRange(NextPlayersOnline);
+			NextPlayersOnline.Clear();
+			firstRun = false;
 		}
 
-		public class MyItem
+		
+		public void PlayLogin()
 		{
-			public string Name { get; set; }
-			public string LastOnline { get; set; }
-		}
-
-
-	}
-
-	public class SoundHandler
-	{
-		SoundPlayer soundPlayer = new SoundPlayer();
-		public void PlaySound()
-		{
-			string location = AppDomain.CurrentDomain.BaseDirectory + "alarm.wav";
+			string location = AppDomain.CurrentDomain.BaseDirectory + "login.wav";
 			soundPlayer.SoundLocation = location;
 			soundPlayer.Play();
 		}

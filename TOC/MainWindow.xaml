@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TOC"
         mc:Ignorable="d"
-        Title="TOC" Height="350" Width="200">
+        Title="TOC" Height="400" Width="400">
 
     <StackPanel>
         <StackPanel Margin="10 5 10 0">
             <ComboBox x:Name="cbGuilds"/>
         </StackPanel>
-        <StackPanel Margin="10 5 10 0">
+        <!--<StackPanel Margin="10 5 10 0">
             <TextBox x:Name="tbSingle" Text="SingleNode" />
         </StackPanel>
         <StackPanel Margin="10 5 10 0">
             <TextBox x:Name="tbNode" Text="Nodes" />
-        </StackPanel>
+        </StackPanel>-->
         <StackPanel Margin="10 5 10 0">
             <TextBox x:Name="tbCurrent" Text="" IsEnabled="False" />
         </StackPanel>
