@@ -51,6 +51,8 @@ namespace TOC
 			cbGuilds.IsEnabled = true;
 			tbTextBox.Clear();
 			firstRun = true;
+			PlayersOnline.Clear();
+			NextPlayersOnline.Clear();
 		}
 
 		private void getGuilds()
@@ -130,7 +132,6 @@ namespace TOC
 			firstRun = false;
 		}
 
-		
 		public void PlayLogin()
 		{
 			string location = AppDomain.CurrentDomain.BaseDirectory + "login.wav";
