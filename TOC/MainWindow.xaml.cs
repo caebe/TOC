@@ -12,24 +12,24 @@ namespace TOC
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		bool firstRun = true;
-		List<string> PlayersOnline = new List<string>();
-		List<string> NextPlayersOnline = new List<string>();
-		
-		DispatcherTimer timer = new DispatcherTimer();
-		SoundPlayer soundPlayer = new SoundPlayer();
+		private bool firstRun = true;
+		private readonly List<string> PlayersOnline = new List<string>();
+		private readonly List<string> NextPlayersOnline = new List<string>();
+
+		readonly DispatcherTimer timer = new DispatcherTimer();
+		readonly SoundPlayer soundPlayer = new SoundPlayer();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			btnStop.IsEnabled = false;
-			getGuilds();
+			GetGuilds();
 		}
 
-		private void btnStart_Click(object sender, RoutedEventArgs e)
+		private void BtnStart_Click(object sender, RoutedEventArgs e)
 		{
 			timer.Interval = TimeSpan.FromSeconds(5);
-			timer.Tick += timer_Tick;
+			timer.Tick += Timer_Tick;
 			timer.Start();
 
 			btnStop.IsEnabled = true;
@@ -39,10 +39,10 @@ namespace TOC
 
 			tbCurrent.Text = "https://tibiantis.info/stats/guild/" + cbGuilds.SelectedItem.ToString().Replace(" ", "%20");
 			tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [STARTED] - REFRESHING EVERY 5 SECONDS" + Environment.NewLine;
-			tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") +  " DELAY CAN BE UP TO ONE MINUTE DUE TO LIMITATIONS OF TIBIANTIS WEBPAGE" + Environment.NewLine;
+			tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") +  " [INFO] MAX DELAY 1 MIN (SERVERLIMITATION)" + Environment.NewLine;
+			tbTextBox.Text +=  "---------------------------------------------------------------" + Environment.NewLine;
 		}
-
-		private void btnStopConsole_Click(object sender, RoutedEventArgs e)
+			private void BtnStopConsole_Click(object sender, RoutedEventArgs e)
 		{
 			timer.Stop();
 			btnStop.IsEnabled = false;
@@ -55,7 +55,7 @@ namespace TOC
 			NextPlayersOnline.Clear();
 		}
 
-		private void getGuilds()
+		private void GetGuilds()
 		{
 			tbTextBox.Clear();
 			cbGuilds.Items.Clear();
@@ -83,7 +83,7 @@ namespace TOC
 			}
 		}
 
-		void timer_Tick(object sender, EventArgs e)
+		void Timer_Tick(object sender, EventArgs e)
 		{
 			var url = "https://tibiantis.info/stats/guild/" + cbGuilds.SelectedItem.ToString().Replace(" ", "%20");
 
@@ -117,11 +117,6 @@ namespace TOC
 							tbTextBox.Text += Environment.NewLine;
 							PlayLogin();
 						}
-						//else if (PlayersOnline.Contains(item.InnerText) && !NextPlayersOnline.Contains(item.InnerText))
-						//{
-						//	tbTextBox.Text += DateTime.Now.ToString("HH:mm:ss tt") + " [LOGGED OUT] " + item.InnerText;
-						//	tbTextBox.Text += Environment.NewLine;
-						//}
 					}
 				}
 			}

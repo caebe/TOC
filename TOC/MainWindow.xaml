@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TOC"
         mc:Ignorable="d"
-        Title="TOC" Height="400" Width="400">
+        Title="TOC" Height="400" Width="400" ResizeMode="CanMinimize">
 
     <StackPanel>
         <StackPanel Margin="10 5 10 0">
@@ -26,8 +26,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnStart" Content="Start" Margin="0 0 5 0" Grid.Column="0" Click="btnStart_Click"/>
-                <Button x:Name="btnStop" Content="Stop" Margin="5 0 0 0"  Grid.Column="1" Click="btnStopConsole_Click"/>
+                <Button x:Name="btnStart" Content="Start" Margin="0 0 5 0" Grid.Column="0" Click="BtnStart_Click"/>
+                <Button x:Name="btnStop" Content="Stop" Margin="5 0 0 0"  Grid.Column="1" Click="BtnStopConsole_Click"/>
             </Grid>
         </StackPanel>
         <StackPanel Margin="10">
